@@ -41,13 +41,14 @@ public class BaseClass extends EventUtilities{
             fis = new FileInputStream(projPath + fileSeparator + "src" + fileSeparator + "main" + fileSeparator + "resources" + fileSeparator + "properties" + fileSeparator + "config.properties");
             config.load(fis);
             String browserName = Reporter.getCurrentTestResult().getTestContext().getCurrentXmlTest().getParameter("browserName");
-            String remoteFlag = Reporter.getCurrentTestResult().getTestContext().getCurrentXmlTest().getParameter("remote");
+            String remoteFlag = System.getProperty("remote", "false");
 
             //select browser
             if (osName.contains("mac")) {
                 if (browserName.equals("chrome")) {
                     if(remoteFlag.equalsIgnoreCase("true")){
-                        wdm = WebDriverManager.chromedriver().browserInDocker();
+                        wdm = WebDriverManager.chromedriver().browserInDocker()
+                                .enableVnc().enableRecording();
                         driver = wdm.create();
                     }else{
                         WebDriverManager.chromedriver().setup();
@@ -60,7 +61,8 @@ public class BaseClass extends EventUtilities{
             } else if (osName.contains("windows")) {
                 if (browserName.equals("chrome")) {
                     if(remoteFlag.equalsIgnoreCase("true")){
-                        wdm = WebDriverManager.chromedriver().browserInDocker();
+                        wdm = WebDriverManager.chromedriver().browserInDocker()
+                                .enableVnc().enableRecording();
                         driver = wdm.create();
                     }else{
                         WebDriverManager.chromedriver().setup();
@@ -73,7 +75,8 @@ public class BaseClass extends EventUtilities{
             } else if (osName.contains("linux")) {
                 if (browserName.equals("chrome")) {
                     if(remoteFlag.equalsIgnoreCase("true")){
-                        wdm = WebDriverManager.chromedriver().browserInDocker();
+                        wdm = WebDriverManager.chromedriver().browserInDocker()
+                                .enableVnc().enableRecording();
                         driver = wdm.create();
                     }else{
                         WebDriverManager.chromedriver().setup();
@@ -89,7 +92,7 @@ public class BaseClass extends EventUtilities{
     }
 
     public void tearDown() throws IOException {
-        String remoteFlag = Reporter.getCurrentTestResult().getTestContext().getCurrentXmlTest().getParameter("remote");
+        String remoteFlag = System.getProperty("remote", "false");
         if(remoteFlag.equalsIgnoreCase("true")){
             wdm.quit();
             return;

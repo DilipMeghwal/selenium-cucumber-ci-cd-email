@@ -3,7 +3,7 @@
 <suite name="Data Drivern FW">
 	<test thread-count="5" name="Test on chrome">
 		<parameter name="browserName" value="chrome"/>
-		<parameter name="remote" value="false"/>
+		<!--parameter name="remote" value="false"/-->
 		<classes>
 			<class name="testRunner.TestRunnerParallelExecution" />
 		</classes>

@@ -8,9 +8,8 @@
 ## steps to run from testngRunner.xml.
 - Right click on testngRunner.xml and click on run.
 
-## Run on local and remote
-- set remote as ```false``` if you want to run local
-- set remote as ```true in testng.xml``` if you want to run in docker.
+## Run with docker
+- mvn clean test -Dremote=true
 
 ## check cucumber reports in target folder
 - path : ```target/cucumber-reports/cucumber-html-reports```
