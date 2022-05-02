@@ -3,6 +3,7 @@ package base;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.URL;
 import java.time.Duration;
 import java.util.Properties;
 
@@ -14,6 +15,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -22,6 +24,7 @@ import org.testng.SkipException;
 
 public class BaseClass extends EventUtilities{
     public WebDriver driver;
+    public WebDriverManager wdm;
     public Properties config = new Properties();
     public String projPath = System.getProperty("user.dir");
     public String fileSeparator = File.separator;
@@ -38,39 +41,47 @@ public class BaseClass extends EventUtilities{
             fis = new FileInputStream(projPath + fileSeparator + "src" + fileSeparator + "main" + fileSeparator + "resources" + fileSeparator + "properties" + fileSeparator + "config.properties");
             config.load(fis);
             String browserName = Reporter.getCurrentTestResult().getTestContext().getCurrentXmlTest().getParameter("browserName");
+            String remoteFlag = Reporter.getCurrentTestResult().getTestContext().getCurrentXmlTest().getParameter("remote");
 
             //select browser
             if (osName.contains("mac")) {
                 if (browserName.equals("chrome")) {
-                    WebDriverManager.chromedriver().setup();
-                    driver = new ChromeDriver();
-                    driver.manage().window().maximize();
-                    driver.get(config.getProperty("testSiteUrl"));
-                } else if (browserName.equals("safari")) {
-                    driver = new SafariDriver();
+                    if(remoteFlag.equalsIgnoreCase("true")){
+                        wdm = WebDriverManager.chromedriver().browserInDocker();
+                        driver = wdm.create();
+                    }else{
+                        WebDriverManager.chromedriver().setup();
+                        ChromeOptions options = new ChromeOptions();
+                        driver = new ChromeDriver(options);
+                    }
                     driver.manage().window().maximize();
                     driver.get(config.getProperty("testSiteUrl"));
                 }
             } else if (osName.contains("windows")) {
                 if (browserName.equals("chrome")) {
-                    WebDriverManager.chromedriver().setup();
-                    ChromeOptions options = new ChromeOptions();
-                    driver = new ChromeDriver(options);
+                    if(remoteFlag.equalsIgnoreCase("true")){
+                        wdm = WebDriverManager.chromedriver().browserInDocker();
+                        driver = wdm.create();
+                    }else{
+                        WebDriverManager.chromedriver().setup();
+                        ChromeOptions options = new ChromeOptions();
+                        driver = new ChromeDriver(options);
+                    }
                     driver.manage().window().maximize();
                     driver.get(config.getProperty("testSiteUrl"));
-                } else if (browserName.equals("safari")) {
-                    throw new SkipException("Skipping the run on safari on windows as its not supported");
                 }
             } else if (osName.contains("linux")) {
                 if (browserName.equals("chrome")) {
-                    WebDriverManager.chromedriver().setup();
-                    ChromeOptions options = new ChromeOptions();
-                    options.addArguments("--headless");
-                    driver = new ChromeDriver(options);
+                    if(remoteFlag.equalsIgnoreCase("true")){
+                        wdm = WebDriverManager.chromedriver().browserInDocker();
+                        driver = wdm.create();
+                    }else{
+                        WebDriverManager.chromedriver().setup();
+                        ChromeOptions options = new ChromeOptions();
+                        driver = new ChromeDriver(options);
+                    }
                     driver.manage().window().maximize();
                     driver.get(config.getProperty("testSiteUrl"));
-                } else if (browserName.equals("safari")) {
-                    throw new SkipException("Skipping the run on safari on linux as its not supported");
                 }
             }
 
@@ -78,6 +89,11 @@ public class BaseClass extends EventUtilities{
     }
 
     public void tearDown() throws IOException {
+        String remoteFlag = Reporter.getCurrentTestResult().getTestContext().getCurrentXmlTest().getParameter("remote");
+        if(remoteFlag.equalsIgnoreCase("true")){
+            wdm.quit();
+            return;
+        }
         if (driver != null) {
             driver.quit();
         }
