@@ -4,13 +4,13 @@
 	<test thread-count="5" name="Test on chrome">
 		<parameter name="browserName" value="chrome"/>
 		<classes>
-			<class name="src.main.java.testRunner.TestRunnerParallelExecution" />
+			<class name="testRunner.TestRunnerParallelExecution" />
 		</classes>
 	</test>
 	<test thread-count="5" name="Test on safari">
 		<parameter name="browserName" value="safari"/>
 		<classes>
-			<class name="src.main.java.testRunner.TestRunnerParallelExecution" />
+			<class name="testRunner.TestRunnerParallelExecution" />
 		</classes>
 	</test>
 </suite> <!-- Suite -->

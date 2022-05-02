@@ -20,7 +20,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Reporter;
 import org.testng.SkipException;
 
-public class BaseClass {
+public class BaseClass extends EventUtilities{
     public WebDriver driver;
     public Properties config = new Properties();
     public String projPath = System.getProperty("user.dir");
@@ -35,7 +35,7 @@ public class BaseClass {
 
     public void setUp() throws IOException {
         if (driver == null) {
-            fis = new FileInputStream(projPath + fileSeparator + "src" + fileSeparator + "test" + fileSeparator + "resources" + fileSeparator + "properties" + fileSeparator + "config.properties");
+            fis = new FileInputStream(projPath + fileSeparator + "src" + fileSeparator + "main" + fileSeparator + "resources" + fileSeparator + "properties" + fileSeparator + "config.properties");
             config.load(fis);
             String browserName = Reporter.getCurrentTestResult().getTestContext().getCurrentXmlTest().getParameter("browserName");
 
@@ -81,104 +81,5 @@ public class BaseClass {
         if (driver != null) {
             driver.quit();
         }
-    }
-
-    // to check element is present or not
-    public <T> boolean isElementPresent(T element) {
-        try {
-            driver.findElement((By) element).isDisplayed();
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-    // Set Test to inutBox
-    public <T> void setInputBoxText(T element, String text) {
-        try {
-            driver.findElement((By) element).sendKeys(text);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    // click On element
-    public <T> void clickOnElement(T element) {
-        try {
-            driver.findElement((By) element).click();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    // click On element having Text
-    public <T> void clickOnWithVisibleText(String xpath) {
-        try {
-            driver.findElement(By.xpath(xpath)).click();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    // Hover over element
-    public <T> void mouseOverOnElement(T element) {
-        try {
-            Actions action = new Actions(driver);
-            action.moveToElement(driver.findElement((By) element)).build().perform();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    // ExplicitWait
-    public <T> void applyExplicitWait(T element) {
-        try {
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-            wait.until(ExpectedConditions.elementToBeClickable(driver.findElement((By) element)));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    // scroll element into view
-    public <T> void scrollElementIntoView(String xpath) {
-        try {
-            JavascriptExecutor jsExe = (JavascriptExecutor) driver;
-            jsExe.executeScript("arguments[0].scrollIntoView(true);", driver.findElement(By.xpath(xpath)));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    // click using Javascript exec
-    public <T> void clickOnElementUsingJS(T element) {
-        try {
-            JavascriptExecutor jsExe = (JavascriptExecutor) driver;
-            jsExe.executeScript("arguments[0].click();", driver.findElement((By) element));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    // get Text
-    public <T> String getTextOfElement(T element) {
-        String strText = null;
-        try {
-            if (!driver.findElement((By) element).getText().equals("")) {
-                strText = driver.findElement((By) element).getText();
-            } else if (!driver.findElement((By) element).getAttribute("textContent").equals("")) {
-                strText = driver.findElement((By) element).getAttribute("textContent");
-            } else if (!driver.findElement((By) element).getAttribute("innerText").equals("")) {
-                strText = driver.findElement((By) element).getAttribute("innerText");
-            } else if (!driver.findElement((By) element).getAttribute("outerText").equals("")) {
-                strText = driver.findElement((By) element).getAttribute("outerText");
-            } else if (!driver.findElement((By) element).getAttribute("innerHTML").equals("")) {
-                strText = driver.findElement((By) element).getAttribute("innerHTML");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return strText;
     }
 }

@@ -7,7 +7,7 @@ import io.cucumber.testng.CucumberOptions;
 
 
 @CucumberOptions(features = {"src/test/features"},
-        glue = {"test.java.stepDefinations"},
+        glue = {"stepDefinitions"},
         monochrome = true,
         //dryRun = true,
         tags = "@Parallel",
@@ -20,7 +20,7 @@ import io.cucumber.testng.CucumberOptions;
 public class TestRunnerParallelExecution extends AbstractTestNGCucumberTests {
 
     @Override
-    @DataProvider(parallel = true)
+    @DataProvider(parallel = false)
     public Object[][] scenarios() {
         return super.scenarios();
     }

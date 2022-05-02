@@ -6,9 +6,15 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import base.BaseClass;
+
+import java.time.Duration;
+import java.util.Iterator;
+import java.util.Set;
 
 public class HomePage extends BaseClass {
     private WebDriver driver;
@@ -19,53 +25,75 @@ public class HomePage extends BaseClass {
     }
 
     By ICON_HAMBURGER_MENU = By.cssSelector("div[id='nav-main'] div[class='nav-left']");
-    //By LINK_TV_APPLIANCES_ELECTRONICS = By.xpath("//a[@class='hmenu-item' and contains(., 'TV, Appliances, Electronics')]");
-    //By LINK_TELEVISION = By.xpath("//a[@class='hmenu-item' and contains(., 'Televisions')]");
-    //By LINK_BRAND = By.xpath("//li[@class='a-spacing-micro']//a[contains(.,'Samsung')]");
-    By SELECT_SORT = By.cssSelector("select[id=\"s-result-sort-select\"]");
-    //By LI_HIGH_TO_LOW = By.xpath("//li[contains(., 'Price: High to Low')]");
-    //By DIV_PRODUCT = By.cssSelector("div[data-cel-widget*='search_result_'][data-component-type='s-search-result']");
+    By DIV_LEFT_PANEL = By.cssSelector("div[id=\"hmenu-content\"]");
+    By A_BACK_TO_MAIN_MENU = By.cssSelector("a[aria-label=\"Back to main menu\"]");
+    By SPAN_SORT = By.cssSelector("span[class=\"a-dropdown-container\"]");
+    By SPAN_SORT_TEXT = By.cssSelector("span[class=\"a-dropdown-prompt\"]");
 
 
     public void checkHomePageOpened() {
-        applyExplicitWait(ICON_HAMBURGER_MENU);
-        Assert.assertTrue(isElementPresent(ICON_HAMBURGER_MENU), "Verify Home page opened successfully.");
+        applyExplicitWaitBy(driver, ICON_HAMBURGER_MENU);
+        Assert.assertTrue(isElementPresent(driver, ICON_HAMBURGER_MENU), "Verify Home page opened successfully.");
     }
 
     public void clickOnHamburgerMenu() {
-        applyExplicitWait(ICON_HAMBURGER_MENU);
-        clickOnElement(ICON_HAMBURGER_MENU);
+        applyExplicitWaitBy(driver, ICON_HAMBURGER_MENU);
+        clickOnElement(driver, ICON_HAMBURGER_MENU);
+        applyExplicitWaitBy(driver, DIV_LEFT_PANEL);
+        Assert.assertTrue(isElementPresent(driver, DIV_LEFT_PANEL), "Verify user can see departments.");
     }
 
     public void clickOnShopWithDepartment(String department) {
         String xpath = "//a[@class='hmenu-item' and contains(., '" + department + "')]";
-        applyExplicitWait(driver.findElement(By.xpath(xpath)));
-        clickOnWithVisibleText(xpath);
+        applyExplicitWait(driver, By.xpath(xpath));
+        scrollElementIntoView(driver, xpath);
+        clickOnWithVisibleText(driver, xpath);
+        Assert.assertTrue(isElementPresent(driver, A_BACK_TO_MAIN_MENU), "Verify department is selected");
     }
 
     public void clickOnProductType(String productType) {
         String xpath = "//a[@class='hmenu-item' and contains(., '" + productType + "')]";
-        applyExplicitWait(driver.findElement(By.xpath(xpath)));
-        clickOnWithVisibleText(xpath);
+        applyExplicitWait(driver, By.xpath(xpath));
+        scrollElementIntoView(driver, xpath);
+        clickOnWithVisibleText(driver, xpath);
+        Assert.assertTrue(driver.findElements(A_BACK_TO_MAIN_MENU).size() < 1, "Verify product type is selected");
     }
 
     public void clickOnBrand(String brand) {
         String xpath = "//li[@class='a-spacing-micro']//a[contains(.,'" + brand + "')]";
-        scrollElementIntoView(xpath);
-        applyExplicitWait(driver.findElement(By.xpath(xpath)));
-        clickOnWithVisibleText(xpath);
+        int counter = 0;
+        while(counter < 5){
+            if(!(driver.findElements(By.xpath(xpath)).size() > 0)){
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                scrollBy(driver, 0, 500);
+                counter++;
+            }else{
+                scrollElementIntoView(driver, xpath);
+                break;
+            }
+        }
+        clickOnWithVisibleText(driver, xpath);
+        String checkboxXpath = "//li[@class='a-spacing-micro']//a[contains(.,'" + brand + "')]//parent::div//input";
+        Assert.assertTrue(driver.findElement(By.xpath(checkboxXpath)).isSelected(), "Verify brand is selected");
     }
 
     public void selectSortingMethod(String sorting) {
-        clickOnElement(SELECT_SORT);
+        applyExplicitWait(driver, SPAN_SORT);
+        clickOnElement(driver, SPAN_SORT);
         String xpath = "//li[contains(., '" + sorting + "')]";
-        applyExplicitWait(driver.findElement(By.xpath(xpath)));
-        clickOnWithVisibleText(xpath);
+        applyExplicitWait(driver, By.xpath(xpath));
+        clickOnWithVisibleText(driver, xpath);
+        Assert.assertTrue(driver.findElement(SPAN_SORT_TEXT).getText().equals(sorting), "Verify product is sorted as " + sorting);
     }
 
     public void selectProduct(String productIndex) {
-        String xpath = "div[data-cel-widget*='search_result_" + productIndex + "'][data-component-type='s-search-result']";
-        applyExplicitWait(driver.findElement(By.xpath(xpath)));
-        clickOnWithVisibleText(xpath);
+        String cssSelector = "div[data-cel-widget='search_result_" + productIndex + "'][data-component-type='s-search-result']";
+        applyExplicitWait(driver, By.cssSelector(cssSelector));
+        clickOnElement(driver, By.cssSelector(cssSelector));
     }
+
 }
