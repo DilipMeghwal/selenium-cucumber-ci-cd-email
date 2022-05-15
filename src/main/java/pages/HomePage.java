@@ -29,6 +29,7 @@ public class HomePage extends BaseClass {
     By A_BACK_TO_MAIN_MENU = By.cssSelector("a[aria-label=\"Back to main menu\"]");
     By SPAN_SORT = By.cssSelector("span[class=\"a-dropdown-container\"]");
     By SPAN_SORT_TEXT = By.cssSelector("span[class=\"a-dropdown-prompt\"]");
+    String xpath = "//a[@class='hmenu-item' and contains(., '%s')]";
 
 
     public void checkHomePageOpened() {
@@ -44,7 +45,7 @@ public class HomePage extends BaseClass {
     }
 
     public void clickOnShopWithDepartment(String department) {
-        String xpath = "//a[@class='hmenu-item' and contains(., '" + department + "')]";
+        String.format(xpath, department);
         applyExplicitWait(driver, By.xpath(xpath));
         scrollElementIntoView(driver, xpath);
         clickOnWithVisibleText(driver, xpath);
