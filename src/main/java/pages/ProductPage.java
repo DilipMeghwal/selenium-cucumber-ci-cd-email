@@ -1,6 +1,7 @@
 package pages;
 
 import base.BaseClass;
+import base.EventUtilities;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -28,9 +29,9 @@ public class ProductPage extends BaseClass {
             String childWindow = it.next();
             if (!currentWindow.equalsIgnoreCase(childWindow)) {
                 driver.switchTo().window(childWindow);
-                applyExplicitWait(driver, DIV_ABOUT_PRODUCT);
+                EventUtilities.applyExplicitWait(driver, DIV_ABOUT_PRODUCT);
                 Assert.assertTrue(driver.findElements(DIV_ABOUT_PRODUCT).size() > 0, "Verify that “About this item” section is present.");
-                productContent = getTextOfElement(driver, DIV_ABOUT_PRODUCT);
+                productContent = EventUtilities.getTextOfElement(driver, DIV_ABOUT_PRODUCT);
                 driver.close();
                 driver.switchTo().window(currentWindow);
                 break;

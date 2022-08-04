@@ -11,5 +11,5 @@ Feature: Verify Search TV feature
     And User click on the "<itemIndex>" highest priced item.
     Then Verify that “About this item” section is present and log this section text to console or report.
     Examples:
-      | department                  | productType | brand   | sorting            | itemIndex |
-      | TV, Appliances, Electronics | Televisions | Samsung | Price: High to Low | 2         |
+      | department                  | productType | brand | sorting            | itemIndex |
+      | TV, Appliances, Electronics | Televisions | TCL   | Price: High to Low | 2         |

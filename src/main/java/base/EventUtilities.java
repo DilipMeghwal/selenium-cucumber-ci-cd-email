@@ -12,7 +12,7 @@ import java.time.Duration;
 
 public class EventUtilities {
     // to check element is present or not
-    public boolean isElementPresent(WebDriver driver, By element) {
+    public static boolean isElementPresent(WebDriver driver, By element) {
         try {
             driver.findElement(element).isDisplayed();
             return true;
@@ -23,7 +23,7 @@ public class EventUtilities {
     }
 
     // Set Test to inutBox
-    public void setInputBoxText(WebDriver driver, By element, String text) {
+    public static void setInputBoxText(WebDriver driver, By element, String text) {
         try {
             driver.findElement(element).sendKeys(text);
         } catch (Exception e) {
@@ -32,7 +32,7 @@ public class EventUtilities {
     }
 
     // click On element
-    public void clickOnElement(WebDriver driver, By element) {
+    public static void clickOnElement(WebDriver driver, By element) {
         try {
             driver.findElement(element).click();
         } catch (Exception e) {
@@ -41,7 +41,7 @@ public class EventUtilities {
     }
 
     // click On element having Text
-    public void clickOnWithVisibleText(WebDriver driver, String xpath) {
+    public static void clickOnWithVisibleText(WebDriver driver, String xpath) {
         try {
             driver.findElement(By.xpath(xpath)).click();
         } catch (Exception e) {
@@ -50,7 +50,7 @@ public class EventUtilities {
     }
 
     // Hover over element
-    public void mouseOverOnElement(WebDriver driver, By element) {
+    public static void mouseOverOnElement(WebDriver driver, By element) {
         try {
             Actions action = new Actions(driver);
             action.moveToElement(driver.findElement(element)).build().perform();
@@ -60,7 +60,7 @@ public class EventUtilities {
     }
 
     // ExplicitWait
-    public void applyExplicitWait(WebDriver driver, By element) {
+    public static void applyExplicitWait(WebDriver driver, By element) {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
             wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(element)));
@@ -69,7 +69,16 @@ public class EventUtilities {
         }
     }
 
-    public void applyExplicitWaitVisibility(WebDriver driver, By element) {
+    public static void applyExplicitWaitForVisibility(WebDriver driver, By element) {
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(element));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void applyExplicitWaitVisibility(WebDriver driver, By element) {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
             wait.until(ExpectedConditions.visibilityOfAllElements(driver.findElement(element)));
@@ -78,7 +87,7 @@ public class EventUtilities {
         }
     }
 
-    public void applyExplicitWaitBy(WebDriver driver, By element) {
+    public static void applyExplicitWaitBy(WebDriver driver, By element) {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
             wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(element)));
@@ -88,7 +97,7 @@ public class EventUtilities {
     }
 
     // scroll element into view
-    public void scrollElementIntoView(WebDriver driver, String xpath) {
+    public static void scrollElementIntoView(WebDriver driver, String xpath) {
         try {
             JavascriptExecutor jsExe = (JavascriptExecutor) driver;
             jsExe.executeScript("arguments[0].scrollIntoView(true);", driver.findElement(By.xpath(xpath)));
@@ -98,7 +107,7 @@ public class EventUtilities {
     }
 
     //scroll by
-    public void scrollBy(WebDriver driver, int x, int y) {
+    public static void scrollBy(WebDriver driver, int x, int y) {
         try {
             JavascriptExecutor jsExe = (JavascriptExecutor) driver;
             jsExe.executeScript("window.scrollBy(" + x + "," + y + ")", "");
@@ -108,7 +117,7 @@ public class EventUtilities {
     }
 
     // click using Javascript exec
-    public void clickOnElementUsingJS(WebDriver driver, By element) {
+    public static void clickOnElementUsingJS(WebDriver driver, By element) {
         try {
             JavascriptExecutor jsExe = (JavascriptExecutor) driver;
             jsExe.executeScript("arguments[0].click();", driver.findElement(element));
@@ -118,7 +127,7 @@ public class EventUtilities {
     }
 
     // get Text
-    public String getTextOfElement(WebDriver driver, By element) {
+    public static String getTextOfElement(WebDriver driver, By element) {
         String strText = null;
         try {
             if (!driver.findElement(element).getText().equals("")) {

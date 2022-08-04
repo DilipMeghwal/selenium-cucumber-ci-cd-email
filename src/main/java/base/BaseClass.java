@@ -22,7 +22,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Reporter;
 import org.testng.SkipException;
 
-public class BaseClass extends EventUtilities{
+public class BaseClass{
     public WebDriver driver;
     public WebDriverManager wdm;
     public Properties config = new Properties();
