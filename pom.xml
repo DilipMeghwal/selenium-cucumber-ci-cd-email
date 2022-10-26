@@ -32,6 +32,10 @@
                     <suiteXmlFiles>
                         <suiteXmlFile>testngRunner.xml</suiteXmlFile>
                     </suiteXmlFiles>
+                    <systemPropertyVariables>
+                        <LT_USERNAME>er.dkmeghwal</LT_USERNAME>
+                        <LT_ACCESS_KEY>xbfvzTftzZ42sNLqMJ6ErS1zgLlormT4r83rbVE9L8ZJYhHAf6</LT_ACCESS_KEY>
+                    </systemPropertyVariables>
                 </configuration>
             </plugin>
             <plugin>
