@@ -9,9 +9,9 @@ pipeline {
                 }
             }
             steps {
-                sh 'docker-compose up'
+                sh 'docker compose up'
                 sh 'mvn clean test -Dremote=true'
-                sh 'docker-compose down'
+                sh 'docker compose down'
             }
         }
         stage('Test on window') {
