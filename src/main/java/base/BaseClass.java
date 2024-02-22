@@ -1,30 +1,19 @@
 package base;
 
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import org.testng.Reporter;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
-import java.time.Duration;
 import java.util.Properties;
-
-import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.safari.SafariDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Reporter;
-import org.testng.SkipException;
 
 public class BaseClass{
     public WebDriver driver;
-    public WebDriverManager wdm;
     public Properties config = new Properties();
     public String projPath = System.getProperty("user.dir");
     public String fileSeparator = File.separator;
@@ -47,11 +36,9 @@ public class BaseClass{
             if (osName.contains("mac")) {
                 if (browserName.equals("chrome")) {
                     if(remoteFlag.equalsIgnoreCase("true")){
-                        wdm = WebDriverManager.chromedriver().browserInDocker()
-                                .enableVnc().enableRecording();
-                        driver = wdm.create();
+                        ChromeOptions options = new ChromeOptions();
+                        driver = new RemoteWebDriver(new URL("http://localhost:4444"),options);
                     }else{
-                        WebDriverManager.chromedriver().setup();
                         ChromeOptions options = new ChromeOptions();
                         driver = new ChromeDriver(options);
                     }
@@ -61,11 +48,9 @@ public class BaseClass{
             } else if (osName.contains("windows")) {
                 if (browserName.equals("chrome")) {
                     if(remoteFlag.equalsIgnoreCase("true")){
-                        wdm = WebDriverManager.chromedriver().browserInDocker()
-                                .enableVnc().enableRecording();
-                        driver = wdm.create();
+                        ChromeOptions options = new ChromeOptions();
+                        driver = new RemoteWebDriver(new URL("http://localhost:4444"),options);
                     }else{
-                        WebDriverManager.chromedriver().setup();
                         ChromeOptions options = new ChromeOptions();
                         driver = new ChromeDriver(options);
                     }
@@ -75,11 +60,9 @@ public class BaseClass{
             } else if (osName.contains("linux")) {
                 if (browserName.equals("chrome")) {
                     if(remoteFlag.equalsIgnoreCase("true")){
-                        wdm = WebDriverManager.chromedriver().browserInDocker()
-                                .enableVnc().enableRecording();
-                        driver = wdm.create();
+                        ChromeOptions options = new ChromeOptions();
+                        driver = new RemoteWebDriver(new URL("http://localhost:4444"),options);
                     }else{
-                        WebDriverManager.chromedriver().setup();
                         ChromeOptions options = new ChromeOptions();
                         driver = new ChromeDriver(options);
                     }
@@ -91,12 +74,7 @@ public class BaseClass{
         }
     }
 
-    public void tearDown() throws IOException {
-        String remoteFlag = System.getProperty("remote", "false");
-        if(remoteFlag.equalsIgnoreCase("true")){
-            wdm.quit();
-            return;
-        }
+    public void tearDown(){
         if (driver != null) {
             driver.quit();
         }

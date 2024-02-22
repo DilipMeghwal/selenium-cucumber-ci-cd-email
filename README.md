@@ -9,6 +9,7 @@
 - Right click on testngRunner.xml and click on run.
 
 ## Run with docker
+- docker-compose up
 - mvn clean test -Dremote=true
 
 ## check cucumber reports in target folder
