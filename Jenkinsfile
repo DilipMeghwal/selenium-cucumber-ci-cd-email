@@ -1,6 +1,6 @@
 #!groovy
 pipeline {
-    agent any
+    agent { dockerfile true }
     stages {
         stage('Test on unix') {
             when {
