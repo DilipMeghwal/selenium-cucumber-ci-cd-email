@@ -46,6 +46,7 @@ jobs:
       - name: Deploy cucumber report to GitHub Pages
         uses: peaceiris/actions-github-pages@v3.1.12
         with:
+          github_token: ${{secret.GITHUB_TOKEN_PERSONAL}}
           publish_dir: ./target/cucumber-reports/cucumber-html-reports
 
 
