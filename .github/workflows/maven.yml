@@ -28,17 +28,17 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Set up Docker
-        uses: docker/setup-buildx-action@v1
+      uses: docker/setup-buildx-action@v1
     - name: Build and start Docker Compose services
-            run: |
-              docker-compose -f docker-compose.yml up -d
+      run: |
+        docker-compose -f docker-compose.yml up -d
     - name: Wait for services to start
-            run: sleep 10
+      run: sleep 10
     - name: Run Maven tests
-            run: mvn clean test
+      run: mvn clean test
     - name: Stop Docker Compose services
-            run: |
-              docker-compose -f docker-compose.yml down
+      run: |
+        docker-compose -f docker-compose.yml down
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     - name: Update dependency graph
