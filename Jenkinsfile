@@ -28,9 +28,9 @@ pipeline {
                 }
             }
             steps {
-                bat 'docker-compose up'
+                bat 'docker-compose up -d'
                 bat 'mvn clean test -Dremote=true'
-                bat 'docker-compose down'
+                bat 'docker-compose down -d'
             }
         }
         stage('reports') {
