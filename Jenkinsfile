@@ -12,17 +12,17 @@ pipeline {
                             env.PATH = "${dockerHome}/bin:${mavenHome}/bin:${env.PATH}"
                             sh 'docker compose up -d'
                             sh 'mvn clean test -Dremote=true'
-                            sh 'docker compose down -d'
+                            sh 'docker compose down'
                         } else {
                             bat 'docker-compose up -d'
                             bat 'mvn clean test -Dremote=true'
-                            bat 'docker-compose down -d'
+                            bat 'docker-compose down'
                         }
                     }catch (Exception e){
                         if (isUnix() == true) {
-                            sh 'docker compose down -d'
+                            sh 'docker compose down'
                         }else{
-                            bat 'docker-compose down -d'
+                            bat 'docker-compose down'
                         }
                     }
                 }
