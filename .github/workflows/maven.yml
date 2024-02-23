@@ -37,7 +37,7 @@ jobs:
       - name: Wait for services to start
         run: sleep 10
       - name: Run Maven tests
-        run: mvn clean test -Dremote=true
+        run: mvn clean test
       - name: Stop Docker Compose services
         if: always()
         run: |
