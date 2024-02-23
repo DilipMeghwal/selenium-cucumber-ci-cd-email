@@ -13,11 +13,11 @@ pipeline {
                     def dockerHome = tool 'docker'
                     def mavenHome = tool 'maven'
                     env.PATH = "${dockerHome}/bin:${mavenHome}/bin:${env.PATH}"
-                    sh 'docker compose up'
+                    sh 'docker compose up -d'
                 }
                 script{
                     sh 'mvn clean test -Dremote=true'
-                    sh 'docker compose down'
+                    sh 'docker compose down -d'
                 }
             }
         }
