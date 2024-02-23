@@ -44,10 +44,10 @@ jobs:
           docker-compose -f docker-compose.yml down
       - name: Deploy cucumber report to GitHub Pages
         if: always()
-        uses: peaceiris/actions-github-pages@v3.1.12
+        uses: JamesIves/github-pages-deploy-action@v4.5.0
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN_PERSONAL }}
-          publish_dir: ./target/cucumber-reports/cucumber-html-reports
+          branch: gh-pages
+          folder: ./target/cucumber-reports/cucumber-html-reports
       # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
       - name: Update dependency graph
         uses: advanced-security/maven-dependency-submission-action@571e99aab1055c2e71a1e2309b9691de18d6b7d6
