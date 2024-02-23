@@ -9,12 +9,14 @@ pipeline {
                 }
             }
             steps {
-                def dockerHome = tool 'docker'
-                def mavenHome = tool 'maven'
-                env.PATH = "${dockerHome}/bin:${mavenHome}/bin:${env.PATH}"
-                sh 'docker compose up'
-                sh 'mvn clean test -Dremote=true'
-                sh 'docker compose down'
+                script {
+                    def dockerHome = tool 'docker'
+                    def mavenHome = tool 'maven'
+                    env.PATH = "${dockerHome}/bin:${mavenHome}/bin:${env.PATH}"
+                    sh 'docker compose up'
+                    sh 'mvn clean test -Dremote=true'
+                    sh 'docker compose down'
+                }
             }
         }
         stage('Test on window') {
