@@ -39,6 +39,13 @@ jobs:
     - name: Stop Docker Compose services
       run: |
         docker-compose -f docker-compose.yml down
+    - name: Deploy to GitHub Pages
+      uses: JamesIves/github-pages-deploy-action@v4.5.0
+      with:
+        branch: gh-pages
+        folder: ./cucumber-reports/cucumber-html-reports
+        
+      
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     - name: Update dependency graph
