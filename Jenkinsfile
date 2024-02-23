@@ -24,6 +24,7 @@ pipeline {
                         }else{
                             bat 'docker-compose down'
                         }
+                        throw e;
                     }
                 }
             }

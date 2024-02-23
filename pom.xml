@@ -55,7 +55,7 @@
                             <inputDirectory>${project.build.directory}</inputDirectory>
                             <jsonFiles>
                                 <!-- supports wildcard or name pattern -->
-                                <param>**/*.json</param>
+                                <param>**/cucumber-reports/*.json</param>
                             </jsonFiles>
                             <checkBuildResult>true</checkBuildResult>
                         </configuration>
