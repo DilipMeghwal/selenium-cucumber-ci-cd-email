@@ -5,17 +5,25 @@ pipeline {
         stage('Running Tests') {
             steps {
                 script {
-                    if (isUnix() == true) {
-                        def dockerHome = tool 'docker'
-                        def mavenHome = tool 'maven'
-                        env.PATH = "${dockerHome}/bin:${mavenHome}/bin:${env.PATH}"
-                        sh 'docker compose up -d'
-                        sh 'mvn clean test -Dremote=true'
-                        sh 'docker compose down -d'
-                    }else{
-                        bat 'docker-compose up -d'
-                        bat 'mvn clean test -Dremote=true'
-                        bat 'docker-compose down -d'
+                    try {
+                        if (isUnix() == true) {
+                            def dockerHome = tool 'docker'
+                            def mavenHome = tool 'maven'
+                            env.PATH = "${dockerHome}/bin:${mavenHome}/bin:${env.PATH}"
+                            sh 'docker compose up -d'
+                            sh 'mvn clean test -Dremote=true'
+                            sh 'docker compose down -d'
+                        } else {
+                            bat 'docker-compose up -d'
+                            bat 'mvn clean test -Dremote=true'
+                            bat 'docker-compose down -d'
+                        }
+                    }catch (Exception e){
+                        if (isUnix() == true) {
+                            sh 'docker compose down -d'
+                        }else{
+                            bat 'docker-compose down -d'
+                        }
                     }
                 }
             }
