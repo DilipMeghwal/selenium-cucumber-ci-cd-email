@@ -43,13 +43,10 @@ jobs:
       - name: Stop Docker Compose services
         run: |
           docker-compose -f docker-compose.yml down
-      - name: Copy cucumber report
-        run: cp ./target/cucumber-reports/cucumber-html-reports/overview-features.html ./target/cucumber-reports/cucumber-html-reports/index.html
-      - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4.5.0
+      - name: Deploy cucumber report to GitHub Pages
+        uses: peaceiris/actions-github-pages@v3.1.12
         with:
-          branch: gh-pages
-          folder: ./target/cucumber-reports/cucumber-html-reports
+          publish_dir: ./target/cucumber-reports/cucumber-html-reports
 
 
 
