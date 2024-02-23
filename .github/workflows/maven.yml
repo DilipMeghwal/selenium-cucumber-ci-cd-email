@@ -42,7 +42,7 @@ jobs:
         if: always()
         run: |
           docker-compose -f docker-compose.yml down
-      - name: Deploy cucumber report to GitHub Pages
+      - name: Deploy Cucumber Report to GitHub Pages
         if: always()
         uses: JamesIves/github-pages-deploy-action@v4.5.0
         with:
