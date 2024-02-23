@@ -41,9 +41,11 @@ jobs:
       - name: Run Maven tests
         run: mvn clean test -Dremote=true
       - name: Stop Docker Compose services
+        if: always()
         run: |
           docker-compose -f docker-compose.yml down
       - name: Deploy cucumber report to GitHub Pages
+        if: always()
         uses: peaceiris/actions-github-pages@v3.1.12
         with:
           github_token: ${{secrets.GITHUB_TOKEN_PERSONAL}}
