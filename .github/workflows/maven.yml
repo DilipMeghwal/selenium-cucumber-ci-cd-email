@@ -43,6 +43,7 @@ jobs:
         run: |
           docker-compose -f docker-compose.yml down
       - name: Copy cucumber report
+        if: always()
         run: cp ./target/cucumber-reports/cucumber-html-reports/overview-features.html ./target/cucumber-reports/cucumber-html-reports/index.html
       - name: Deploy cucumber report to GitHub Pages
         if: always()
