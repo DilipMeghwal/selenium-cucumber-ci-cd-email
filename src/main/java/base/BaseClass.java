@@ -49,7 +49,7 @@ public class BaseClass{
                 if (browserName.equals("chrome")) {
                     if(remoteFlag.equalsIgnoreCase("true")){
                         ChromeOptions options = new ChromeOptions();
-                        driver = new RemoteWebDriver(new URL("http://localhost:4444"),options);
+                        driver = new RemoteWebDriver(new URL("http://127.0.0.1:60837/"),options);
                     }else{
                         ChromeOptions options = new ChromeOptions();
                         driver = new ChromeDriver(options);
@@ -61,7 +61,7 @@ public class BaseClass{
                 if (browserName.equals("chrome")) {
                     if(remoteFlag.equalsIgnoreCase("true")){
                         ChromeOptions options = new ChromeOptions();
-                        driver = new RemoteWebDriver(new URL("http://localhost:4444"),options);
+                        driver = new RemoteWebDriver(new URL("http://127.0.0.1:60837/"),options);
                     }else{
                         ChromeOptions options = new ChromeOptions();
                         driver = new ChromeDriver(options);
