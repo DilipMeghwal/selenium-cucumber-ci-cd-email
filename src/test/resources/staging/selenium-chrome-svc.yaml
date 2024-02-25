@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: selenium-node-chrome
+  labels:
+    name: selenium-node-chrome
+spec:
+  selector:
+    app: selenium-node-chrome
+    browser: chrome
+  ports:
+    - name: nodeport
+      protocol: TCP
+      port: 5555
+      targetPort: 5555
+    - name: node-port-grid
+      protocol: TCP
+      port: 4444
+      targetPort: 4444

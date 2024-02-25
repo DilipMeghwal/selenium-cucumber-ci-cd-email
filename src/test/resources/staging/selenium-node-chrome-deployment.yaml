@@ -5,7 +5,7 @@ metadata:
   labels:
     app: selenium-node-chrome
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: selenium-node-chrome
@@ -33,6 +33,10 @@ spec:
               value: "4443"
             - name: SE_EVENT_BUS_PUBLISH_PORT
               value: "4442"
+            - name: HUB_HOST
+              value: "selenium-hub"
+            - name: HUB_PORT
+              value: "4444"
           resources:
             limits:
               memory: "1000Mi"

@@ -11,6 +11,7 @@
 ## Run with docker
 - docker-compose up
 - mvn clean test -Dremote=true
+- mvn clean test -Dremote=true -Dk8=true
 
 ## check cucumber reports in target folder
 - path : ```target/cucumber-reports/cucumber-html-reports```
@@ -29,15 +30,40 @@
 * https://minikube.sigs.k8s.io/docs/start/
 * https://kubernetes.io/docs/tasks/tools/install-kubectl-windows/
 * https://sahajamit.medium.com/spinning-up-your-own-scalable-selenium-grid-in-kubernetes-part-1-e4017bac68f4
+* https://www.linkedin.com/pulse/selenium-4-grid-integration-kubernetes-rishi-khanna/
+* https://www.linkedin.com/pulse/deploying-selenium-grid-k8s-use-locally-mikhail-shabatura-m5toe/
+* minikube start —driver=docker
+* minikube config set driver docker (if you see error "These changes will take effect upon a minikube delete and then a minikube start" then try and check minikube profile already created "minikube profile list")
+* kubectl create --filename=src/test/resources/staging/selenium-hub-deployment.yaml
+* kubectl create --filename=src/test/resources/staging/selenium-hub-svc.yaml
+* kubectl describe svc selenium-hub
 * $NODEPORT = (kubectl get svc --selector 'app=selenium-hub' -o jsonpath='{.items[0].spec.ports[0].nodePort}')
 * $NODE = (kubectl get nodes -o jsonpath='{.items[0].metadata.name}')
 * curl http://${NODE}:${NODEPORT}
 * minikube dashboard (minikube url)
+* minikube addons enable ingress
+* kubectl create --filename=src/test/resources/staging/selenium-hub-deployement-ingress.yaml
+* kubectl delete -A ValidatingWebhookConfiguration ingress-nginx-admission (If any error)
+* kubectl get ingress
+* update C:\Windows\System32\drivers\etc\hosts (IP and hosts)
 * minikube service selenium-hub --url (To get selenium hub url)
+* kubectl create --filename=src/test/resources/staging/selenium-node-chrome-deployment.yaml
+* minikube ssh (to ping and check the ingress host, see notes below)
+* mvn clean test -Dremote=true
 * kubectl delete deployment selenium-hub
 * kubectl delete deployment selenium-node-chrome
 * kubectl delete deployment selenium-node-firefox
-* kubectl delete deployment selenium-python
 * kubectl delete svc selenium-hub
+* kubectl delete svc selenium-node-chrome
+* minikube stop
+* minikube delete
+
+### macOS
+* export NODEPORT=`kubectl get svc --selector='app=selenium-hub' --output=template --template="{{ with index .items 0}}{{with index .spec.ports 0 }}{{.nodePort}}{{end}}{{end}}"`
+* export NODE=`kubectl get nodes --output=template --template="{{with index .items 0 }}{{.metadata.name}}{{end}}"`
+* curl http://$NODE:$NODEPORT
+
+### note for ingress on other than linux
+- The thing to take away from this is that - on an O/S other than Linux - the IP address is 127.0.0.1 NOT whatever IP you see when you run > kubectl get ingress. This is because - on an OS other than Linux - you need minikube tunnel running as a 'bridge' between 127.0.0.1 and whatever IP the Ingress controller is using. It's 127.0.0.1 you need to reference in your hosts file, not the IP shown in > kubectl get ingress. Luck.
 
 

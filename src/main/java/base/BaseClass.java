@@ -35,11 +35,10 @@ public class BaseClass{
             //select browser
             if (osName.contains("mac")) {
                 if (browserName.equals("chrome")) {
+                    ChromeOptions options = new ChromeOptions();
                     if(remoteFlag.equalsIgnoreCase("true")){
-                        ChromeOptions options = new ChromeOptions();
                         driver = new RemoteWebDriver(new URL("http://localhost:4444"),options);
                     }else{
-                        ChromeOptions options = new ChromeOptions();
                         driver = new ChromeDriver(options);
                     }
                     driver.manage().window().maximize();
@@ -47,11 +46,10 @@ public class BaseClass{
                 }
             } else if (osName.contains("windows")) {
                 if (browserName.equals("chrome")) {
+                    ChromeOptions options = new ChromeOptions();
                     if(remoteFlag.equalsIgnoreCase("true")){
-                        ChromeOptions options = new ChromeOptions();
-                        driver = new RemoteWebDriver(new URL("http://127.0.0.1:60837/"),options);
+                        driver = new RemoteWebDriver(new URL("http://localhost:4444"),options);
                     }else{
-                        ChromeOptions options = new ChromeOptions();
                         driver = new ChromeDriver(options);
                     }
                     driver.manage().window().maximize();
@@ -59,11 +57,10 @@ public class BaseClass{
                 }
             } else if (osName.contains("linux")) {
                 if (browserName.equals("chrome")) {
+                    ChromeOptions options = new ChromeOptions();
                     if(remoteFlag.equalsIgnoreCase("true")){
-                        ChromeOptions options = new ChromeOptions();
-                        driver = new RemoteWebDriver(new URL("http://127.0.0.1:60837/"),options);
+                        driver = new RemoteWebDriver(new URL("http://localhost:4444"),options);
                     }else{
-                        ChromeOptions options = new ChromeOptions();
                         driver = new ChromeDriver(options);
                     }
                     driver.manage().window().maximize();
