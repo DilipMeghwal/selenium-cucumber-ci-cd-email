@@ -42,21 +42,30 @@
 * curl http://${NODE}:${NODEPORT}
 * minikube dashboard (minikube url)
 * minikube addons enable ingress
+* minikube tunnel
 * kubectl create --filename=src/test/resources/staging/selenium-hub-deployement-ingress.yaml
 * kubectl delete -A ValidatingWebhookConfiguration ingress-nginx-admission (If any error)
 * kubectl get ingress
 * update C:\Windows\System32\drivers\etc\hosts (IP and hosts)
 * minikube service selenium-hub --url (To get selenium hub url)
 * kubectl create --filename=src/test/resources/staging/selenium-node-chrome-deployment.yaml
-* minikube ssh (to ping and check the ingress host, see notes below)
+* minikube ssh (to ping and check the ingress host, see notes below) => ping my-selenium-grid.com then exit
 * mvn clean test -Dremote=true
 * kubectl delete deployment selenium-hub
+* kubectl delete deployment selenium-hub-deployement-ingress
 * kubectl delete deployment selenium-node-chrome
 * kubectl delete deployment selenium-node-firefox
 * kubectl delete svc selenium-hub
 * kubectl delete svc selenium-node-chrome
+* kubectl delete all  --all -n default
 * minikube stop
-* minikube delete
+* minikube delete --all --purge
+* rm -rf ~/.minikube/
+
+minikube start --driver=docker --memory=1024Mi --force-systemd
+minikube addons enable metrics-server
+kubectl describe nodes
+kubectl top node
 
 ### macOS
 * export NODEPORT=`kubectl get svc --selector='app=selenium-hub' --output=template --template="{{ with index .items 0}}{{with index .spec.ports 0 }}{{.nodePort}}{{end}}{{end}}"`
@@ -65,5 +74,8 @@
 
 ### note for ingress on other than linux
 - The thing to take away from this is that - on an O/S other than Linux - the IP address is 127.0.0.1 NOT whatever IP you see when you run > kubectl get ingress. This is because - on an OS other than Linux - you need minikube tunnel running as a 'bridge' between 127.0.0.1 and whatever IP the Ingress controller is using. It's 127.0.0.1 you need to reference in your hosts file, not the IP shown in > kubectl get ingress. Luck.
+
+### aws
+- https://www.youtube.com/watch?v=kUOMIFvMgfs
 
 
