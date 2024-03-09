@@ -77,7 +77,7 @@ $(document).ready(function() {
     <tr class="info">
       <td>cucumber-jvm-example</td>
         <td>1</td>
-      <td>06 Mar 2024, 05:44</td>
+      <td>09 Mar 2024, 07:17</td>
     </tr>
   </tbody>
 </table>
@@ -127,7 +127,7 @@ $(document).ready(function() {
 </div>
 
 
-  <span class="lead-duration duration">0.392</span>
+  <span class="lead-duration duration">2.574</span>
 
 
   <span data-toggle="collapse" class=" collapsable-control" data-target="#element-1">
@@ -165,7 +165,7 @@ $(document).ready(function() {
             <span class="keyword indention">Before</span>
               <span class="location name">stepDefinitions.CucumberHooks.beforeSuite(io.cucumber.java.Scenario)</span>
 
-  <span class="lead-duration duration">2.389</span>
+  <span class="lead-duration duration">2.532</span>
 
           </div>
 
@@ -202,7 +202,7 @@ $(document).ready(function() {
   <span class="keyword indention">Given</span>
   <span class="name">User open amazon web app.</span>
 
-  <span class="lead-duration duration">0.199</span>
+  <span class="lead-duration duration">0.235</span>
 
 </div>
 
@@ -239,7 +239,7 @@ $(document).ready(function() {
             <span class="keyword indention">After</span>
               <span class="location name">stepDefinitions.CucumberHooks.afterStep(io.cucumber.java.Scenario)</span>
 
-  <span class="lead-duration duration">0.000</span>
+  <span class="lead-duration duration">0.001</span>
 
           </div>
 
@@ -257,11 +257,11 @@ $(document).ready(function() {
       <div class="step">
 
 
-<div class="brief step-name-When failed">
+<div class="brief step-name-When passed">
   <span class="keyword indention">When</span>
   <span class="name">User click on the hamburger menu in the top left corner.</span>
 
-  <span class="lead-duration duration">0.192</span>
+  <span class="lead-duration duration">0.870</span>
 
 </div>
 
@@ -270,23 +270,64 @@ $(document).ready(function() {
 
 
 
-  <div class="inner-level">
-    <div class="message indention">
-      <div data-toggle="collapse" class=" collapsable-control" data-target="#msg-5">
-          <a>java.lang.AssertionError:</a>
-      </div>
-      <div id="msg-5" class="collapse collapsable-details  in ">
-        <pre>java.lang.AssertionError: Verify user can see departments. expected [true] but found [false]
-	at org.testng.Assert.fail(Assert.java:110)
-	at org.testng.Assert.failNotEquals(Assert.java:1413)
-	at org.testng.Assert.assertTrue(Assert.java:56)
-	at pages.HomePage.clickOnHamburgerMenu(HomePage.java:44)
-	at stepDefinitions.HomePageSteps.user_click_on_the_hamburger_menu_in_the_top_left_corner(HomePageSteps.java:32)
-	at &#10045;.User click on the hamburger menu in the top left corner.(file:///home/runner/work/SDET-Clipboard-Health-Dilip-Meghwal/SDET-Clipboard-Health-Dilip-Meghwal/src/test/features/SearchTV.feature:6)
-</pre>
-      </div>
+
+
+
+
+
+
+
+
+
+  <div class="inner-level hooks-step-after">
+    <div data-toggle="collapse" class=" collapsed  collapsable-control" data-target="#after-5">
+
+<div class="brief passed">
+  <span class="keyword indention">Hooks</span>
+  <span class="name"></span>
+
+
+     <i class="chevron fa fa-fw"></i>
+</div>
+
+    </div>
+
+    <div id="after-5" class="inner-level collapse collapsable-details ">
+        <div class="hook">
+          <div class="brief passed">
+            <span class="keyword indention">After</span>
+              <span class="location name">stepDefinitions.CucumberHooks.afterStep(io.cucumber.java.Scenario)</span>
+
+  <span class="lead-duration duration">0.004</span>
+
+          </div>
+
+
+
+
+
+
+
+        </div>
     </div>
   </div>
+
+      </div>
+      <div class="step">
+
+
+<div class="brief step-name-And passed">
+  <span class="keyword indention">And</span>
+  <span class="name">User scroll own and then Click on the <span class="argument">&quot;TV, Appliances, Electronics&quot;</span> link under Shop by Department section.</span>
+
+  <span class="lead-duration duration">0.215</span>
+
+</div>
+
+
+
+
+
 
 
 
@@ -316,7 +357,84 @@ $(document).ready(function() {
             <span class="keyword indention">After</span>
               <span class="location name">stepDefinitions.CucumberHooks.afterStep(io.cucumber.java.Scenario)</span>
 
-  <span class="lead-duration duration">0.346</span>
+  <span class="lead-duration duration">0.000</span>
+
+          </div>
+
+
+
+
+
+
+
+        </div>
+    </div>
+  </div>
+
+      </div>
+      <div class="step">
+
+
+<div class="brief step-name-And failed">
+  <span class="keyword indention">And</span>
+  <span class="name">User click on <span class="argument">&quot;Televisions&quot;</span> under Tv, Audio &amp; Cameras sub section.</span>
+
+  <span class="lead-duration duration">1.252</span>
+
+</div>
+
+
+
+
+
+
+  <div class="inner-level">
+    <div class="message indention">
+      <div data-toggle="collapse" class=" collapsable-control" data-target="#msg-7">
+          <a>java.lang.AssertionError:</a>
+      </div>
+      <div id="msg-7" class="collapse collapsable-details  in ">
+        <pre>java.lang.AssertionError: Verify product type is selected expected [true] but found [false]
+	at org.testng.Assert.fail(Assert.java:110)
+	at org.testng.Assert.failNotEquals(Assert.java:1413)
+	at org.testng.Assert.assertTrue(Assert.java:56)
+	at pages.HomePage.clickOnProductType(HomePage.java:51)
+	at stepDefinitions.HomePageSteps.user_click_on_under_tv_audio_cameras_sub_section(HomePageSteps.java:39)
+	at &#10045;.User click on &quot;Televisions&quot; under Tv, Audio &amp; Cameras sub section.(file:///home/runner/work/SDET-Clipboard-Health-Dilip-Meghwal/SDET-Clipboard-Health-Dilip-Meghwal/src/test/features/SearchTV.feature:8)
+</pre>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+  <div class="inner-level hooks-step-after">
+    <div data-toggle="collapse" class=" collapsed  collapsable-control" data-target="#after-8">
+
+<div class="brief passed">
+  <span class="keyword indention">Hooks</span>
+  <span class="name"></span>
+
+
+     <i class="chevron fa fa-fw"></i>
+</div>
+
+    </div>
+
+    <div id="after-8" class="inner-level collapse collapsable-details ">
+        <div class="hook">
+          <div class="brief passed">
+            <span class="keyword indention">After</span>
+              <span class="location name">stepDefinitions.CucumberHooks.afterStep(io.cucumber.java.Scenario)</span>
+
+  <span class="lead-duration duration">0.251</span>
 
           </div>
 
@@ -327,137 +445,19 @@ $(document).ready(function() {
 
   <div class="embeddings inner-level">
   <div class="embedding indention">
-    <div data-toggle="collapse" data-target="#embedding-7" class="collapsable-control">
-      <a>image/png1709703888739</a>
-      <a href="embeddings/embedding_1940229597.png" download target="_blank">
+    <div data-toggle="collapse" data-target="#embedding-9" class="collapsable-control">
+      <a>image/png1709968628587</a>
+      <a href="embeddings/embedding_337676771.png" download target="_blank">
         <span class="download-button glyphicon glyphicon-download-alt"></span>
       </a>
     </div>
-    <div id="embedding-7" class="collapse collapsable-details ">
+    <div id="embedding-9" class="collapse collapsable-details ">
       <div class="embedding-content">
-        <img src="embeddings/embedding_1940229597.png">
+        <img src="embeddings/embedding_337676771.png">
       </div>
     </div>
   </div>
   </div>
-
-        </div>
-    </div>
-  </div>
-
-      </div>
-      <div class="step">
-
-
-<div class="brief step-name-And skipped">
-  <span class="keyword indention">And</span>
-  <span class="name">User scroll own and then Click on the <span class="argument">&quot;TV, Appliances, Electronics&quot;</span> link under Shop by Department section.</span>
-
-  <span class="lead-duration duration">0.000</span>
-
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <div class="inner-level hooks-step-after">
-    <div data-toggle="collapse" class=" collapsable-control" data-target="#after-8">
-
-<div class="brief failed">
-  <span class="keyword indention">Hooks</span>
-  <span class="name"></span>
-
-
-     <i class="chevron fa fa-fw"></i>
-</div>
-
-    </div>
-
-    <div id="after-8" class="inner-level collapse collapsable-details  in ">
-        <div class="hook">
-          <div class="brief skipped">
-            <span class="keyword indention">After</span>
-              <span class="location name">stepDefinitions.CucumberHooks.afterStep(io.cucumber.java.Scenario)</span>
-
-  <span class="lead-duration duration">0.000</span>
-
-          </div>
-
-
-
-
-
-
-
-        </div>
-    </div>
-  </div>
-
-      </div>
-      <div class="step">
-
-
-<div class="brief step-name-And skipped">
-  <span class="keyword indention">And</span>
-  <span class="name">User click on <span class="argument">&quot;Televisions&quot;</span> under Tv, Audio &amp; Cameras sub section.</span>
-
-  <span class="lead-duration duration">0.000</span>
-
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <div class="inner-level hooks-step-after">
-    <div data-toggle="collapse" class=" collapsable-control" data-target="#after-9">
-
-<div class="brief failed">
-  <span class="keyword indention">Hooks</span>
-  <span class="name"></span>
-
-
-     <i class="chevron fa fa-fw"></i>
-</div>
-
-    </div>
-
-    <div id="after-9" class="inner-level collapse collapsable-details  in ">
-        <div class="hook">
-          <div class="brief skipped">
-            <span class="keyword indention">After</span>
-              <span class="location name">stepDefinitions.CucumberHooks.afterStep(io.cucumber.java.Scenario)</span>
-
-  <span class="lead-duration duration">0.000</span>
-
-          </div>
-
-
-
-
-
-
 
         </div>
     </div>
@@ -725,7 +725,7 @@ $(document).ready(function() {
             <span class="keyword indention">After</span>
               <span class="location name">stepDefinitions.CucumberHooks.afterSuite()</span>
 
-  <span class="lead-duration duration">0.092</span>
+  <span class="lead-duration duration">0.090</span>
 
           </div>
 
