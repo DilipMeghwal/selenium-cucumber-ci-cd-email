@@ -11,6 +11,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Reporter;
+import pageobjectmanager.PageObjectManager;
 import utils.AppConstants;
 import utils.ConfigProps;
 
@@ -27,7 +28,7 @@ public class BaseClass {
     public WebDriver driver;
 
     @Getter
-    public String testUrl;
+    PageObjectManager pom;
 
     public ConfigProps config;
 
@@ -40,6 +41,7 @@ public class BaseClass {
                 config = ConfigCache.getOrCreate(ConfigProps.class);
                 String osName = config.osName();
                 driver = createBrowserInstance(osName, browserName, remoteFlag);
+                this.pom = new PageObjectManager(driver);
                 driver.manage().window().maximize();
                 driver.get(config.url());
                 driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
