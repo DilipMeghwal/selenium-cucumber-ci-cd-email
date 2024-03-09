@@ -1,4 +1,4 @@
-package pageObjectManager;
+package pageobjectmanager;
 
 import org.openqa.selenium.WebDriver;
 import pages.HomePage;

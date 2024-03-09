@@ -1,24 +1,15 @@
 package pages;
 
-import base.EventUtilities;
+import utils.EventUtilities;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import base.BaseClass;
 
-import java.time.Duration;
-import java.util.Iterator;
-import java.util.Set;
-
 public class HomePage extends BaseClass {
-    private WebDriver driver;
+    public WebDriver driver;
 
     public HomePage(WebDriver driver) {
         this.driver = driver;
@@ -60,15 +51,15 @@ public class HomePage extends BaseClass {
         Assert.assertTrue(driver.findElements(A_BACK_TO_MAIN_MENU).size() < 1, "Verify product type is selected");
     }
 
-    public void clickOnBrand(String brand) {
+    public void clickOnBrand(String brand){
         String xpath = "//li[@class='a-spacing-micro']//span[text()='" + brand + "']";
         int counter = 0;
         while(counter < 5){
-            if(!(driver.findElements(By.xpath(xpath)).size() > 0)){
+            if(driver.findElements(By.xpath(xpath)).isEmpty()){
                 try {
                     Thread.sleep(3000);
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    throw new RuntimeException(e);
                 }
                 EventUtilities.scrollBy(driver, 0, 500);
                 counter++;

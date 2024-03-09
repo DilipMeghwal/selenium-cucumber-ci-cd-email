@@ -1,11 +1,9 @@
 package stepDefinitions;
 
 import base.BaseClass;
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
 import org.openqa.selenium.WebDriver;
-import pageObjectManager.PageObjectManager;
+import pageobjectmanager.PageObjectManager;
 
 public class ProductPageSteps extends BaseClass {
 
@@ -15,7 +13,7 @@ public class ProductPageSteps extends BaseClass {
 
     public ProductPageSteps(BaseClass baseClass) {
         this.baseClass = baseClass;
-        this.driver = baseClass.driver;
+        this.driver = baseClass.getDriver();
     }
 
     PageObjectManager POM = new PageObjectManager();

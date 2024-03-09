@@ -1,13 +1,10 @@
 package stepDefinitions;
 
 import base.BaseClass;
-import io.cucumber.java.PendingException;
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.WebDriver;
-import pageObjectManager.PageObjectManager;
+import pageobjectmanager.PageObjectManager;
 
 public class HomePageSteps extends BaseClass {
 
@@ -17,7 +14,7 @@ public class HomePageSteps extends BaseClass {
 
     public HomePageSteps(BaseClass baseClass) {
         this.baseClass = baseClass;
-        this.driver = baseClass.driver;
+        this.driver = baseClass.getDriver();
     }
 
     PageObjectManager POM = new PageObjectManager();

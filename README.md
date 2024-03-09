@@ -81,4 +81,11 @@ kubectl top node
 
 https://automationqahub.com/how-to-create-disposable-selenium-grid-using-docker/
 
+### sonarqube
+- mvn verify sonar:sonar -Dsonar.login=admin -Dsonar.password=admin@123
+- https://www.fosstechnix.com/how-to-install-sonarqube-on-windows-4-steps/
+
+## properties file lib
+- https://eliasnogueira.com/easily-manage-properties-files-in-java-with-owner/
+
 
