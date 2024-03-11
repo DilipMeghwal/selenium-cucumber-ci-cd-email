@@ -34,6 +34,7 @@
 * https://www.linkedin.com/pulse/deploying-selenium-grid-k8s-use-locally-mikhail-shabatura-m5toe/
 * minikube start —driver=docker
 * minikube config set driver docker (if you see error "These changes will take effect upon a minikube delete and then a minikube start" then try and check minikube profile already created "minikube profile list")
+* docker context use default
 * kubectl create --filename=src/test/resources/staging/selenium-hub-deployment.yaml
 * kubectl create --filename=src/test/resources/staging/selenium-hub-svc.yaml
 * kubectl describe svc selenium-hub
@@ -66,6 +67,11 @@ minikube start --driver=docker --memory=1024Mi --force-systemd
 minikube addons enable metrics-server
 kubectl describe nodes
 kubectl top node
+
+### fetch local docker image
+- eval $(minikube docker-env)
+- docker build -t image-name
+- minikube image ls
 
 ### macOS
 * export NODEPORT=`kubectl get svc --selector='app=selenium-hub' --output=template --template="{{ with index .items 0}}{{with index .spec.ports 0 }}{{.nodePort}}{{end}}{{end}}"`
