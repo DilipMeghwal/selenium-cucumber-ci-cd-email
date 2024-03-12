@@ -1,4 +1,4 @@
-# SDET-Clipboard-Health-Dilip-Meghwal
+# Selenium-Cucumber-CI-CD-Email
 
 ## steps to run as maven project
 - run ```mvn clean test``` from command prompt.
