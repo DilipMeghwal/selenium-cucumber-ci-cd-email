@@ -6,7 +6,7 @@ import io.cucumber.java.en.When;
 import org.openqa.selenium.WebDriver;
 import pageobjectmanager.PageObjectManager;
 
-public class HomePageSteps extends BaseClass {
+public class HomePageSteps {
 
     public WebDriver driver;
 

@@ -43,8 +43,9 @@ public class BaseClass {
                 driver = createBrowserInstance(osName, browserName, remoteFlag);
                 this.pom = new PageObjectManager(driver);
                 driver.manage().window().maximize();
-                driver.get(config.url());
+                driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
                 driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
+                driver.get(config.url());
             } catch (Exception e) {
                 log.error("Error occurred while creating driver instance : " + e);
                 throw new RuntimeException(e);
